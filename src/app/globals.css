@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #f7f2e7;
+  --color-charcoal: #2a2318;
+
+  --color-hemp-50: #f6f5ef;
+  --color-hemp-100: #eae6d6;
+  --color-hemp-200: #d3cca8;
+  --color-hemp-300: #b3a877;
+  --color-hemp-400: #8f8354;
+  --color-hemp-500: #6b6140;
+  --color-hemp-600: #544c33;
+  --color-hemp-700: #423c29;
+  --color-hemp-800: #332e20;
+  --color-hemp-900: #241f16;
+
+  --color-rust-400: #c98552;
+  --color-rust-500: #ad6939;
+  --color-rust-600: #8a522a;
+
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-work-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+}
