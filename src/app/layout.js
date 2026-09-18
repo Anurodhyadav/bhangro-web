@@ -1,4 +1,5 @@
 import { Fraunces, Work_Sans } from "next/font/google";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -50,7 +51,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${workSans.variable}`}>
       <body className="bg-cream text-charcoal font-sans antialiased">
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );

@@ -28,6 +28,63 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
+  background-color: var(--color-hemp-300);
   color: var(--color-charcoal);
+}
+
+.illustration-wrap {
+  animation: fadeIn 0.8s ease-out both;
+}
+
+.bag-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.leaf-sway {
+  animation: sway 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes sway {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .illustration-wrap,
+  .bag-float,
+  .leaf-sway {
+    animation: none;
+  }
 }
