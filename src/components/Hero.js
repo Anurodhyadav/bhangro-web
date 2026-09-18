@@ -25,8 +25,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-md text-lg text-hemp-100/90">
-            Backpacks, totes, fanny packs and side bags — handcrafted from 100% hemp,
-            Nepali Dhaka fabric and pure leather by artisans in Kathmandu.
+            Backpacks, fanny packs and side bags — handcrafted from 100% hemp,
+            Nepali Dhaka fabric by artisans in Kathmandu.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">

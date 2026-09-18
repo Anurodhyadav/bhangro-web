@@ -1,4 +1,4 @@
-import { Fraunces, Work_Sans } from "next/font/google";
+import { Fraunces, Figtree } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
@@ -8,10 +8,10 @@ const fraunces = Fraunces({
   weight: ["500", "600", "700"],
 });
 
-const workSans = Work_Sans({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-work-sans",
-  weight: ["400", "500", "600"],
+  variable: "--font-figtree",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -49,7 +49,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${workSans.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${figtree.variable}`}>
       <body className="bg-cream text-charcoal font-sans antialiased">
         <CartProvider>{children}</CartProvider>
       </body>
