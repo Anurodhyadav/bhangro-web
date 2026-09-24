@@ -137,7 +137,7 @@ export default function CheckoutPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-cream py-24 flex items-center justify-center">
+        <main className="min-h-screen bg-hemp-200 py-24 flex items-center justify-center">
           <p className="text-hemp-700">Loading checkout...</p>
         </main>
         <Footer />
@@ -150,9 +150,9 @@ export default function CheckoutPage() {
     return (
       <>
         <Navbar />
-        <main className="bg-cream min-h-screen py-16">
+        <main className="bg-hemp-200 min-h-screen py-16">
           <div className="mx-auto max-w-3xl px-6">
-            <div className="rounded-3xl bg-cream border border-hemp-200 p-8 sm:p-12 shadow-xl text-center space-y-6">
+            <div className="rounded-3xl bg-hemp-200 border border-hemp-200 p-8 sm:p-12 shadow-xl text-center space-y-6">
               <div className="mx-auto w-20 h-20 rounded-full bg-rust-500/10 text-rust-600 flex items-center justify-center">
                 <CheckCircle size={48} />
               </div>
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 text-left space-y-3 text-sm">
+              <div className="rounded-2xl bg-hemp-200 border border-hemp-200 p-6 text-left space-y-3 text-sm">
                 <div className="flex justify-between border-b border-hemp-200 pb-3">
                   <span className="text-hemp-600">Order Reference ID:</span>
                   <span className="font-mono font-bold text-hemp-900">{orderSuccess.id}</span>
@@ -210,7 +210,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-cream min-h-screen py-12">
+      <main className="bg-hemp-200 min-h-screen py-12">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-8">
             <Link
@@ -228,7 +228,7 @@ export default function CheckoutPage() {
             {/* Left Column: Billing Details & Additional Info (7 Cols) */}
             <div className="lg:col-span-7 space-y-8">
               {/* Billing & Shipping Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-200 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Billing & Shipping
                 </h2>
@@ -245,7 +245,7 @@ export default function CheckoutPage() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="e.g. Suman"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -260,7 +260,7 @@ export default function CheckoutPage() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       placeholder="e.g. Shrestha"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
                 </div>
@@ -275,7 +275,7 @@ export default function CheckoutPage() {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     placeholder="Company name"
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -302,7 +302,7 @@ export default function CheckoutPage() {
                     value={formData.address}
                     onChange={handleInputChange}
                     placeholder="House number and street name"
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -316,7 +316,7 @@ export default function CheckoutPage() {
                     value={formData.apartment}
                     onChange={handleInputChange}
                     placeholder="Apartment, suite, unit, etc."
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -332,7 +332,7 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="e.g. Kathmandu"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -344,7 +344,7 @@ export default function CheckoutPage() {
                       name="district"
                       value={formData.district}
                       onChange={handleInputChange}
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     >
                       <option value="Kathmandu">Kathmandu</option>
                       <option value="Lalitpur">Lalitpur</option>
@@ -368,7 +368,7 @@ export default function CheckoutPage() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="e.g. 9813316996"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -383,14 +383,14 @@ export default function CheckoutPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="e.g. name@example.com"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Additional Information Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-4 shadow-sm">
+              <div className="rounded-2xl bg-hemp-200 border border-hemp-200 p-6 sm:p-8 space-y-4 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Additional Information
                 </h2>
@@ -404,7 +404,7 @@ export default function CheckoutPage() {
                     value={formData.notes}
                     onChange={handleInputChange}
                     placeholder="Notes about your order, e.g. special delivery instructions."
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
               </div>
@@ -413,7 +413,7 @@ export default function CheckoutPage() {
             {/* Right Column: Order Summary & Payment Section (5 Cols) */}
             <div className="lg:col-span-5 space-y-8">
               {/* Your Order Summary Table */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-200 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Your Order
                 </h2>
@@ -458,14 +458,14 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment & Receipt Upload Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-200 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Payment Method
                 </h2>
 
                 {/* Radio Options */}
                 <div className="space-y-4">
-                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-cream cursor-pointer hover:border-rust-500 transition">
+                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-hemp-200 cursor-pointer hover:border-rust-500 transition">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -484,7 +484,7 @@ export default function CheckoutPage() {
                     </div>
                   </label>
 
-                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-cream cursor-pointer hover:border-rust-500 transition">
+                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-hemp-200 cursor-pointer hover:border-rust-500 transition">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -506,7 +506,7 @@ export default function CheckoutPage() {
 
                 {/* Static Bank & eSewa Transfer Details */}
                 {paymentMethod === "bank_esewa" && (
-                  <div className="rounded-xl border border-hemp-300 bg-cream p-5 space-y-4 text-xs">
+                  <div className="rounded-xl border border-hemp-300 bg-hemp-200 p-5 space-y-4 text-xs">
                     <p className="text-hemp-800 leading-relaxed">
                       Please pay directly into our bank account or via e-Sewa, using your <strong>Order Name</strong> or <strong>Phone Number</strong> as reference.
                     </p>
@@ -537,7 +537,7 @@ export default function CheckoutPage() {
                       <label className="block font-bold text-hemp-900 mb-1.5">
                         Upload Payment Receipt (Screenshot or PDF)
                       </label>
-                      <div className="relative border-2 border-dashed border-hemp-300 rounded-xl p-4 text-center bg-hemp-50/50 hover:bg-hemp-100/50 transition cursor-pointer">
+                      <div className="relative border-2 border-dashed border-hemp-300 rounded-xl p-4 text-center bg-hemp-200/50 hover:bg-hemp-100/50 transition cursor-pointer">
                         <input
                           type="file"
                           accept="image/*,.pdf"

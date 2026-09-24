@@ -14,7 +14,7 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:py-28 items-center z-10">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-sm font-medium text-hemp-100">
+          <span className="inline-flex items-center gap-2 rounded-full bg-hemp-200/10 px-4 py-1.5 text-sm font-medium text-hemp-100">
             <Leaf size={16} className="text-rust-400" />
             Authentic Hemp · Handmade in Nepal
           </span>

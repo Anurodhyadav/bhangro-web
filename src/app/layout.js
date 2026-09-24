@@ -1,5 +1,6 @@
 import { Fraunces, Figtree } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -50,8 +51,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${figtree.variable}`}>
-      <body className="bg-cream text-charcoal font-sans antialiased">
-        <CartProvider>{children}</CartProvider>
+      <body className="bg-hemp-200 text-charcoal font-sans antialiased">
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
