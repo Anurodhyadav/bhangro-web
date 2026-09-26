@@ -22,7 +22,7 @@ export default function FeaturedProducts() {
             </h2>
           </div>
           <Link
-            href="#products"
+            href="/products"
             className="inline-flex items-center gap-2 font-medium text-hemp-800 hover:text-rust-600 transition-colors"
           >
             Explore all <ArrowRight size={18} />
@@ -48,7 +48,7 @@ export default function FeaturedProducts() {
               <p className="text-hemp-100 text-sm mt-1">{backpackProduct.description}</p>
               <Link
                 href={`/product/${backpackProduct.slug}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream text-hemp-900 px-5 py-2.5 text-sm font-semibold hover:bg-rust-500 hover:text-cream transition-colors"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-hemp-200 text-hemp-900 px-5 py-2.5 text-sm font-semibold hover:bg-rust-500 hover:text-cream transition-colors"
               >
                 Shop Now <ArrowRight size={16} />
               </Link>
@@ -61,7 +61,7 @@ export default function FeaturedProducts() {
               <Link
                 key={product.slug}
                 href={`/product/${product.slug}`}
-                className="group relative flex-1 min-h-[220px] rounded-2xl bg-cream border border-hemp-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                className="group relative flex-1 min-h-[220px] rounded-2xl bg-hemp-200 border border-hemp-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
               >
                 {/* Product Image */}
                 <div className="relative w-full h-full min-h-[220px] flex items-center justify-center p-6">
@@ -72,7 +72,7 @@ export default function FeaturedProducts() {
                     className="object-contain p-6 transition-all duration-300 group-hover:opacity-20 group-hover:scale-105"
                   />
                   {/* Hover Overlay with Name + Price */}
-                  <div className="absolute inset-0 bg-cream/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
+                  <div className="absolute inset-0 bg-hemp-200/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
                     <h4 className="font-serif text-xl sm:text-2xl font-bold tracking-widest text-hemp-900 uppercase">
                       {product.name}
                     </h4>
@@ -97,7 +97,7 @@ export default function FeaturedProducts() {
               <Link
                 key={product.slug}
                 href={`/product/${product.slug}`}
-                className="group relative flex-1 min-h-[220px] rounded-2xl bg-cream border border-hemp-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                className="group relative flex-1 min-h-[220px] rounded-2xl bg-hemp-200 border border-hemp-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
               >
                 {/* Product Image */}
                 <div className="relative w-full h-full min-h-[220px] flex items-center justify-center p-6">
@@ -108,7 +108,7 @@ export default function FeaturedProducts() {
                     className="object-contain p-6 transition-all duration-300 group-hover:opacity-20 group-hover:scale-105"
                   />
                   {/* Hover Overlay with Name + Price */}
-                  <div className="absolute inset-0 bg-cream/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
+                  <div className="absolute inset-0 bg-hemp-200/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
                     <h4 className="font-serif text-xl sm:text-2xl font-bold tracking-widest text-hemp-900 uppercase">
                       {product.name}
                     </h4>
@@ -141,7 +141,7 @@ export default function FeaturedProducts() {
               <p className="text-hemp-100 text-sm mt-1">{hipPackProduct.description}</p>
               <Link
                 href={`/product/${hipPackProduct.slug}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream text-hemp-900 px-5 py-2.5 text-sm font-semibold hover:bg-rust-500 hover:text-cream transition-colors"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-hemp-200 text-hemp-900 px-5 py-2.5 text-sm font-semibold hover:bg-rust-500 hover:text-cream transition-colors"
               >
                 Shop Now <ArrowRight size={16} />
               </Link>

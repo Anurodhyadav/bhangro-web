@@ -19,7 +19,7 @@ export default function WhyBhangro() {
 
       <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {features.map(({ icon: Icon, title, description }) => (
-          <div key={title} className="rounded-2xl border border-hemp-200 bg-hemp-50 p-6 text-center hover:shadow-lg hover:-translate-y-1 transition">
+          <div key={title} className="rounded-2xl border border-hemp-200 bg-hemp-200 p-6 text-center hover:shadow-lg hover:-translate-y-1 transition">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-hemp-800 text-cream">
               <Icon size={26} />
             </div>

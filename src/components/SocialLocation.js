@@ -14,11 +14,8 @@ export default function SocialLocation() {
             <a href="https://www.instagram.com/bhangro__/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-rust-400 transition">
               <InstagramIcon size={20} /> @bhangro__
             </a>
-            <a href="#" className="flex items-center gap-3 hover:text-rust-400 transition">
+            <a href="https://www.facebook.com/profile.php?id=61571575005580" className="flex items-center gap-3 hover:text-rust-400 transition">
               <FacebookIcon size={20} /> Bhangro {/* TODO: link your Facebook page */}
-            </a>
-            <a href="#" className="flex items-center gap-3 hover:text-rust-400 transition">
-              <Music2 size={20} /> TikTok {/* TODO: link your TikTok, if you have one */}
             </a>
           </div>
         </div>
@@ -28,8 +25,7 @@ export default function SocialLocation() {
           <div className="mt-5 space-y-3 text-hemp-100/80 text-sm">
             <p className="flex items-start gap-3">
               <MapPin size={20} className="shrink-0 text-rust-400" />
-              {/* TODO: replace with your exact shop address */}
-              Kathmandu, Nepal
+              Budanilkantha , Kathmandu, Nepal, 44600
             </p>
           </div>
         </div>

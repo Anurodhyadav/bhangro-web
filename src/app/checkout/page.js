@@ -5,11 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/utils/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "@/utils/firebase";
 import { useCart } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CheckCircle, Upload, ArrowLeft, ShieldCheck, CreditCard, Building2, Smartphone } from "lucide-react";
+
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB limit
 
 export default function CheckoutPage() {
   const { cart, cartSubtotal, clearCart, isLoaded } = useCart();
@@ -31,6 +34,7 @@ export default function CheckoutPage() {
 
   const [receiptFile, setReceiptFile] = useState(null);
   const [receiptFileName, setReceiptFileName] = useState("");
+  const [receiptError, setReceiptError] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("bank_esewa");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(null);
@@ -43,6 +47,14 @@ export default function CheckoutPage() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (file.size > MAX_FILE_SIZE) {
+        setReceiptError("File size exceeds 2MB limit. Please upload a file under 2MB.");
+        setReceiptFile(null);
+        setReceiptFileName("");
+        e.target.value = "";
+        return;
+      }
+      setReceiptError("");
       setReceiptFile(file);
       setReceiptFileName(file.name);
     }
@@ -58,6 +70,11 @@ export default function CheckoutPage() {
 
     if (!formData.firstName || !formData.lastName || !formData.address || !formData.city || !formData.phone || !formData.email) {
       alert("Please fill in all required billing details.");
+      return;
+    }
+
+    if (receiptError) {
+      alert("Please select a valid payment receipt file (under 2MB).");
       return;
     }
 
@@ -98,14 +115,19 @@ export default function CheckoutPage() {
       const orderDocRef = await addDoc(collection(db, "orders"), orderPayload);
       const orderId = orderDocRef.id;
 
-      // 2. Prepare Payment Document (Placeholder receipt URL)
-      const placeholderReceiptUrl = receiptFileName
-        ? `https://placeholder.firebasestorage.app/receipts/${Date.now()}_${receiptFileName}`
-        : "https://placeholder.firebasestorage.app/receipts/no_receipt_attached.png";
+      // 2. Upload Payment Receipt to Firebase Storage if uploaded
+      let uploadedReceiptUrl = "no_receipt_attached";
+      if (paymentMethod === "bank_esewa" && receiptFile) {
+        const cleanFileName = receiptFile.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+        const storageRef = ref(storage, `receipts/${orderId}/${Date.now()}_${cleanFileName}`);
+        const snapshot = await uploadBytes(storageRef, receiptFile);
+        uploadedReceiptUrl = await getDownloadURL(snapshot.ref);
+      }
 
+      // 3. Prepare Payment Document
       const paymentPayload = {
         orderId: orderId,
-        receiptUrl: placeholderReceiptUrl,
+        receiptUrl: uploadedReceiptUrl,
         receiptFileName: receiptFileName || "Not uploaded",
         paymentMethod: paymentMethod === "bank_esewa" ? "Bank / eSewa Transfer" : "Cash on Delivery",
         status: "pending",
@@ -137,7 +159,7 @@ export default function CheckoutPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-cream py-24 flex items-center justify-center">
+        <main className="min-h-screen bg-hemp-200 py-24 flex items-center justify-center">
           <p className="text-hemp-700">Loading checkout...</p>
         </main>
         <Footer />
@@ -150,9 +172,9 @@ export default function CheckoutPage() {
     return (
       <>
         <Navbar />
-        <main className="bg-cream min-h-screen py-16">
+        <main className="bg-hemp-200 min-h-screen py-16">
           <div className="mx-auto max-w-3xl px-6">
-            <div className="rounded-3xl bg-cream border border-hemp-200 p-8 sm:p-12 shadow-xl text-center space-y-6">
+            <div className="rounded-3xl bg-hemp-100/50 border border-hemp-200 p-8 sm:p-12 shadow-xl text-center space-y-6">
               <div className="mx-auto w-20 h-20 rounded-full bg-rust-500/10 text-rust-600 flex items-center justify-center">
                 <CheckCircle size={48} />
               </div>
@@ -166,7 +188,7 @@ export default function CheckoutPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 text-left space-y-3 text-sm">
+              <div className="rounded-2xl  border border-hemp-200 p-6 text-left space-y-3 text-sm">
                 <div className="flex justify-between border-b border-hemp-200 pb-3">
                   <span className="text-hemp-600">Order Reference ID:</span>
                   <span className="font-mono font-bold text-hemp-900">{orderSuccess.id}</span>
@@ -194,7 +216,7 @@ export default function CheckoutPage() {
               <div className="pt-4">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 rounded-full bg-hemp-900 px-8 py-3.5 text-sm font-semibold text-cream hover:bg-rust-600 transition"
+                  className="inline-flex items-center gap-2 rounded-full bg-hemp-800 px-8 py-3.5 text-sm font-semibold text-cream hover:bg-rust-600 transition"
                 >
                   Return to Homepage
                 </Link>
@@ -210,7 +232,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-cream min-h-screen py-12">
+      <main className="bg-hemp-200 min-h-screen py-12">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-8">
             <Link
@@ -228,7 +250,7 @@ export default function CheckoutPage() {
             {/* Left Column: Billing Details & Additional Info (7 Cols) */}
             <div className="lg:col-span-7 space-y-8">
               {/* Billing & Shipping Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-100/50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Billing & Shipping
                 </h2>
@@ -245,7 +267,7 @@ export default function CheckoutPage() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="e.g. Suman"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -260,7 +282,7 @@ export default function CheckoutPage() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       placeholder="e.g. Shrestha"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
                 </div>
@@ -275,7 +297,7 @@ export default function CheckoutPage() {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     placeholder="Company name"
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -302,7 +324,7 @@ export default function CheckoutPage() {
                     value={formData.address}
                     onChange={handleInputChange}
                     placeholder="House number and street name"
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -316,7 +338,7 @@ export default function CheckoutPage() {
                     value={formData.apartment}
                     onChange={handleInputChange}
                     placeholder="Apartment, suite, unit, etc."
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
 
@@ -332,7 +354,7 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="e.g. Kathmandu"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -344,7 +366,7 @@ export default function CheckoutPage() {
                       name="district"
                       value={formData.district}
                       onChange={handleInputChange}
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     >
                       <option value="Kathmandu">Kathmandu</option>
                       <option value="Lalitpur">Lalitpur</option>
@@ -368,7 +390,7 @@ export default function CheckoutPage() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="e.g. 9813316996"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
 
@@ -383,14 +405,14 @@ export default function CheckoutPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="e.g. name@example.com"
-                      className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                      className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Additional Information Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-4 shadow-sm">
+              <div className="rounded-2xl bg-hemp-100/50 border border-hemp-200 p-6 sm:p-8 space-y-4 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Additional Information
                 </h2>
@@ -404,7 +426,7 @@ export default function CheckoutPage() {
                     value={formData.notes}
                     onChange={handleInputChange}
                     placeholder="Notes about your order, e.g. special delivery instructions."
-                    className="w-full rounded-xl border border-hemp-300 bg-cream px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                   />
                 </div>
               </div>
@@ -413,7 +435,7 @@ export default function CheckoutPage() {
             {/* Right Column: Order Summary & Payment Section (5 Cols) */}
             <div className="lg:col-span-5 space-y-8">
               {/* Your Order Summary Table */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-100/50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Your Order
                 </h2>
@@ -458,14 +480,14 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment & Receipt Upload Section */}
-              <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="rounded-2xl bg-hemp-100/50 border border-hemp-200 p-6 sm:p-8 space-y-6 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-hemp-900 tracking-wide uppercase border-b border-hemp-200 pb-4">
                   Payment Method
                 </h2>
 
                 {/* Radio Options */}
                 <div className="space-y-4">
-                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-cream cursor-pointer hover:border-rust-500 transition">
+                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-hemp-200 cursor-pointer hover:border-rust-500 transition">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -484,7 +506,7 @@ export default function CheckoutPage() {
                     </div>
                   </label>
 
-                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-cream cursor-pointer hover:border-rust-500 transition">
+                  <label className="flex items-start gap-3 p-3 rounded-xl border border-hemp-300 bg-hemp-200 cursor-pointer hover:border-rust-500 transition">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -506,7 +528,7 @@ export default function CheckoutPage() {
 
                 {/* Static Bank & eSewa Transfer Details */}
                 {paymentMethod === "bank_esewa" && (
-                  <div className="rounded-xl border border-hemp-300 bg-cream p-5 space-y-4 text-xs">
+                  <div className="rounded-xl border border-hemp-300 bg-hemp-200 p-5 space-y-4 text-xs">
                     <p className="text-hemp-800 leading-relaxed">
                       Please pay directly into our bank account or via e-Sewa, using your <strong>Order Name</strong> or <strong>Phone Number</strong> as reference.
                     </p>
@@ -515,10 +537,10 @@ export default function CheckoutPage() {
                       <div className="flex items-start gap-2.5">
                         <Building2 size={16} className="text-rust-500 flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-bold text-hemp-900">Bank Transfer (Kumari Bank)</p>
-                          <p className="text-hemp-700">Branch: Kalimati Branch (Ph: 9813316996)</p>
-                          <p className="text-hemp-700">Account Name: <strong>Bhangro Design Pvt. Ltd.</strong></p>
-                          <p className="text-hemp-700">Account No: <strong>0590131071100001</strong></p>
+                          <p className="font-bold text-hemp-900">Bank Transfer (Xyz Bank)</p>
+                          <p className="text-hemp-700">Branch: Xyz Branch (Ph: 98xxxxxxxx)</p>
+                          <p className="text-hemp-700">Account Name: <strong>Bhangro Bags</strong></p>
+                          <p className="text-hemp-700">Account No: <strong>01xxxxxxxxxxxxxx</strong></p>
                         </div>
                       </div>
 
@@ -526,8 +548,8 @@ export default function CheckoutPage() {
                         <Smartphone size={16} className="text-rust-500 flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="font-bold text-hemp-900">eSewa Wallet</p>
-                          <p className="text-hemp-700">Account Name: <strong>Bhangro Design Pvt. Ltd.</strong></p>
-                          <p className="text-hemp-700">eSewa ID / Phone: <strong>9813316996</strong></p>
+                          <p className="text-hemp-700">Account Name: <strong>Bhangro Bags</strong></p>
+                          <p className="text-hemp-700">eSewa ID / Phone: <strong>98xxxxxxxx</strong></p>
                         </div>
                       </div>
                     </div>
@@ -537,7 +559,7 @@ export default function CheckoutPage() {
                       <label className="block font-bold text-hemp-900 mb-1.5">
                         Upload Payment Receipt (Screenshot or PDF)
                       </label>
-                      <div className="relative border-2 border-dashed border-hemp-300 rounded-xl p-4 text-center bg-hemp-50/50 hover:bg-hemp-100/50 transition cursor-pointer">
+                      <div className={`relative border-2 border-dashed rounded-xl p-4 text-center transition cursor-pointer ${receiptError ? "border-red-500 bg-red-500/10" : "border-hemp-300 bg-hemp-200/50 hover:bg-hemp-100/50"}`}>
                         <input
                           type="file"
                           accept="image/*,.pdf"
@@ -545,13 +567,18 @@ export default function CheckoutPage() {
                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                         />
                         <div className="flex flex-col items-center gap-1.5">
-                          <Upload size={20} className="text-hemp-700" />
-                          <span className="text-xs font-semibold text-hemp-800">
+                          <Upload size={20} className={receiptError ? "text-red-600" : "text-hemp-700"} />
+                          <span className={`text-xs font-semibold ${receiptError ? "text-red-700 font-bold" : "text-hemp-800"}`}>
                             {receiptFileName ? receiptFileName : "Click or drag receipt file to upload"}
                           </span>
-                          <span className="text-[10px] text-hemp-500">Formats: JPG, PNG, PDF</span>
+                          <span className="text-[10px] text-hemp-500">Formats: JPG, PNG, PDF (Max 2MB)</span>
                         </div>
                       </div>
+                      {receiptError && (
+                        <p className="mt-1.5 text-xs font-semibold text-red-600 flex items-center gap-1">
+                          <span>⚠️</span> {receiptError}
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}
@@ -560,7 +587,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || cart.length === 0}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-hemp-900 px-8 py-4 text-base font-bold text-cream uppercase tracking-wider shadow-lg hover:bg-rust-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-hemp-800 px-8 py-4 text-base font-bold text-cream cursor-pointer uppercase tracking-wider shadow-lg hover:bg-rust-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ShieldCheck size={20} />
                   {isSubmitting ? "Placing Order..." : "Place Order"}

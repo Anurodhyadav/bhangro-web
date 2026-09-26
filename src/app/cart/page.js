@@ -14,7 +14,7 @@ export default function CartPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-cream py-24 flex items-center justify-center">
+        <main className="min-h-screen bg-hemp-200 py-24 flex items-center justify-center">
           <div className="text-hemp-700 font-medium">Loading cart...</div>
         </main>
         <Footer />
@@ -25,7 +25,7 @@ export default function CartPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-cream min-h-screen py-12">
+      <main className="bg-hemp-200 min-h-screen py-12">
         <div className="mx-auto max-w-6xl px-6">
           {/* Header */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-hemp-200">
@@ -67,7 +67,7 @@ export default function CartPage() {
                   {cart.map(({ product, quantity }) => (
                     <div key={product.slug} className="py-6 flex flex-col sm:flex-row items-center gap-6">
                       {/* Image Thumbnail */}
-                      <div className="relative w-24 h-24 rounded-xl bg-hemp-50 border border-hemp-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+                      <div className="relative w-24 h-24 rounded-xl bg-hemp-100/50 border border-hemp-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
                         <Image
                           src={product.images[0]}
                           alt={product.name}
@@ -92,7 +92,7 @@ export default function CartPage() {
 
                       {/* Quantity Controls */}
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center rounded-full border border-hemp-300 bg-cream">
+                        <div className="flex items-center rounded-full border border-hemp-300 bg-hemp-100/50">
                           <button
                             onClick={() => updateQuantity(product.slug, quantity - 1)}
                             className="p-2 text-hemp-800 hover:text-rust-600 transition"
@@ -147,7 +147,7 @@ export default function CartPage() {
 
               {/* Order Summary Box (4 Cols) */}
               <div className="lg:col-span-4">
-                <div className="rounded-2xl bg-hemp-50 border border-hemp-200 p-6 space-y-6 shadow-sm sticky top-28">
+                <div className="rounded-2xl bg-hemp-100/50 border border-hemp-200 p-6 space-y-6 shadow-sm sticky top-28">
                   <h2 className="font-serif text-xl font-bold text-hemp-900">Order Summary</h2>
 
                   <div className="space-y-3 text-sm border-b border-hemp-200 pb-4">
