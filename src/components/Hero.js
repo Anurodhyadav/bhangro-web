@@ -31,7 +31,7 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              href="#products"
+              href="products"
               className="inline-flex items-center gap-2 rounded-full bg-rust-500 px-6 py-3 font-medium text-cream hover:bg-rust-600 transition-colors"
             >
               Shop the Collection

@@ -2,7 +2,7 @@ import { Leaf, Layers, Gem, MapPin } from "lucide-react";
 
 const features = [
   { icon: Leaf, title: "100% Hemp", description: "Durable, breathable and biodegradable fiber grown in the Himalayan foothills." },
-  { icon: Layers, title: "Nepali Dhaka", description: "Handwoven Dhaka fabric accents bring traditional Nepali pattern to every piece." },
+  { icon: Layers, title: "Nepali Fabric", description: "Handwoven Dhaka fabric accents bring traditional Nepali pattern to every piece." },
   { icon: Gem, title: "Pure Leather", description: "Genuine leather trims and straps add strength and character that lasts." },
   { icon: MapPin, title: "Handmade in Kathmandu", description: "Every bag is cut, woven and stitched by local artisans in small batches." },
 ];

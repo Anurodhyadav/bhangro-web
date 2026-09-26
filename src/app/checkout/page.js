@@ -263,10 +263,11 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       name="firstName"
+                      autoComplete="given-name"
                       required
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      placeholder="e.g. Suman"
+                      placeholder="First name"
                       className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
@@ -278,10 +279,11 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       name="lastName"
+                      autoComplete="family-name"
                       required
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      placeholder="e.g. Shrestha"
+                      placeholder="Last name"
                       className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
                     />
                   </div>
@@ -294,6 +296,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     name="companyName"
+                    autoComplete="organization"
                     value={formData.companyName}
                     onChange={handleInputChange}
                     placeholder="Company name"
@@ -320,6 +323,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     name="address"
+                    autoComplete="street-address"
                     required
                     value={formData.address}
                     onChange={handleInputChange}
@@ -335,6 +339,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     name="apartment"
+                    autoComplete="address-line2"
                     value={formData.apartment}
                     onChange={handleInputChange}
                     placeholder="Apartment, suite, unit, etc."
@@ -350,6 +355,7 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       name="city"
+                      autoComplete="address-level2"
                       required
                       value={formData.city}
                       onChange={handleInputChange}
@@ -362,19 +368,16 @@ export default function CheckoutPage() {
                     <label className="block text-xs font-bold uppercase tracking-wider text-hemp-700 mb-1">
                       District <span className="text-rust-600">*</span>
                     </label>
-                    <select
+                    <input
+                      type="text"
                       name="district"
+                      autoComplete="address-level2"
+                      required
                       value={formData.district}
                       onChange={handleInputChange}
+                      placeholder="District name"
                       className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm font-medium text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500/50"
-                    >
-                      <option value="Kathmandu">Kathmandu</option>
-                      <option value="Lalitpur">Lalitpur</option>
-                      <option value="Bhaktapur">Bhaktapur</option>
-                      <option value="Pokhara">Pokhara</option>
-                      <option value="Chitwan">Chitwan</option>
-                      <option value="Other">Other District</option>
-                    </select>
+                    />
                   </div>
                 </div>
 
@@ -386,6 +389,7 @@ export default function CheckoutPage() {
                     <input
                       type="tel"
                       name="phone"
+                      autoComplete="tel"
                       required
                       value={formData.phone}
                       onChange={handleInputChange}
@@ -401,6 +405,7 @@ export default function CheckoutPage() {
                     <input
                       type="email"
                       name="email"
+                      autoComplete="email"
                       required
                       value={formData.email}
                       onChange={handleInputChange}

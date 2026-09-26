@@ -497,7 +497,7 @@ export default function AdminPage() {
                     placeholder="e.g. Boulder Sack"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
 
@@ -513,7 +513,7 @@ export default function AdminPage() {
                     placeholder="2750"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
 
@@ -525,7 +525,7 @@ export default function AdminPage() {
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   >
                     <option value="Backpacks">Backpacks</option>
                     <option value="Hip Packs">Hip Packs</option>
@@ -545,7 +545,7 @@ export default function AdminPage() {
                     placeholder="e.g. Moss Green / Beige"
                     value={formData.color}
                     onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
 
@@ -559,7 +559,7 @@ export default function AdminPage() {
                     placeholder="e.g. 100% Wild Hemp"
                     value={formData.fabric}
                     onChange={(e) => setFormData({ ...formData, fabric: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
 
@@ -573,7 +573,7 @@ export default function AdminPage() {
                     placeholder='e.g. 17.25"(H) x 12"(W) x 6"(D)'
                     value={formData.dimensions}
                     onChange={(e) => setFormData({ ...formData, dimensions: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
 
@@ -587,7 +587,7 @@ export default function AdminPage() {
                     placeholder="e.g. 21 L"
                     value={formData.volume}
                     onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
-                    className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                    className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                   />
                 </div>
               </div>
@@ -602,7 +602,7 @@ export default function AdminPage() {
                   placeholder="Enter detailed description of the hemp product..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                  className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                 />
               </div>
 
@@ -616,7 +616,7 @@ export default function AdminPage() {
                   placeholder={"Padded laptop compartment\nDrawstring closure\nAir mesh shoulder padding"}
                   value={formData.features}
                   onChange={(e) => setFormData({ ...formData, features: e.target.value })}
-                  className="w-full rounded-xl border border-hemp-300 bg-white px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
+                  className="w-full rounded-xl border border-hemp-300 bg-hemp-200 px-4 py-2.5 text-sm text-hemp-900 focus:outline-none focus:ring-2 focus:ring-rust-500"
                 />
               </div>
 
@@ -636,7 +636,7 @@ export default function AdminPage() {
                     return (
                       <div
                         key={idx}
-                        className="relative w-24 h-24 rounded-2xl bg-hemp-100 border border-hemp-300 overflow-hidden shadow-sm flex items-center justify-center group"
+                        className="relative w-24 h-24 rounded-2xl bg-hemp-100/50 border border-hemp-300 overflow-hidden shadow-sm flex items-center justify-center group"
                       >
                         <Image
                           src={src}
@@ -657,7 +657,7 @@ export default function AdminPage() {
                   })}
 
                   {imagesState.length < 3 && (
-                    <label className="w-24 h-24 rounded-2xl border-2 border-dashed border-hemp-400 bg-hemp-200/50 hover:bg-hemp-100 flex flex-col items-center justify-center text-hemp-700 cursor-pointer transition">
+                    <label className="w-24 h-24 rounded-2xl border-2 border-dashed border-hemp-400 bg-hemp-100/50 hover:bg-hemp-100 flex flex-col items-center justify-center text-hemp-700 cursor-pointer transition">
                       <Upload size={20} className="mb-1 text-rust-600" />
                       <span className="text-[10px] font-bold uppercase">Upload</span>
                       <input
@@ -677,14 +677,14 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => setIsFormOpen(false)}
-                  className="rounded-full px-6 py-2.5 text-sm font-semibold text-hemp-700 hover:bg-hemp-200 transition"
+                  className="rounded-full px-6 py-2.5 text-sm font-semibold cursor-pointer text-hemp-700 hover:bg-hemp-300 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-full bg-hemp-900 px-7 py-2.5 text-sm font-semibold text-cream hover:bg-rust-600 disabled:opacity-50 transition"
+                  className="inline-flex items-center gap-2 rounded-full bg-hemp-800 px-7 py-2.5 text-sm font-semibold text-cream hover:bg-rust-600 disabled:opacity-50 transition"
                 >
                   {saving && <Loader2 className="animate-spin" size={16} />}
                   {saving ? "Saving Product..." : editingProduct ? "Update Product" : "Save Product"}

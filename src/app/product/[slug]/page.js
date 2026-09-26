@@ -238,7 +238,7 @@ export default function ProductDetailPage({ params }) {
                 <div className="flex items-center rounded-full border border-hemp-300 bg-hemp-200">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="p-3 text-hemp-800 hover:text-rust-600 transition"
+                    className="p-3 text-hemp-800 cursor-pointer hover:text-rust-600 transition"
                     aria-label="Decrease quantity"
                   >
                     <Minus size={16} />
@@ -246,7 +246,7 @@ export default function ProductDetailPage({ params }) {
                   <span className="w-10 text-center font-bold text-hemp-900">{quantity}</span>
                   <button
                     onClick={() => setQuantity((q) => q + 1)}
-                    className="p-3 text-hemp-800 hover:text-rust-600 transition"
+                    className="p-3 text-hemp-800 cursor-pointer hover:text-rust-600 transition"
                     aria-label="Increase quantity"
                   >
                     <Plus size={16} />
@@ -255,7 +255,7 @@ export default function ProductDetailPage({ params }) {
 
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 min-w-[200px] inline-flex items-center justify-center gap-2 rounded-full bg-hemp-900 px-8 py-3.5 text-base font-semibold text-cream shadow-md hover:bg-rust-600 transition-colors"
+                  className="flex-1 min-w-[200px] inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-hemp-900 px-8 py-3.5 text-base font-semibold text-cream shadow-md hover:bg-rust-600 transition-colors"
                 >
                   <ShoppingBag size={20} /> Add to Cart
                 </button>
