@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Menu, X, ShoppingBag, User, LogOut, ShieldCheck, ChevronDown, Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/bhangro_transparent.svg";
 
 const links = [
   { href: "/products", label: "Shop Collection" },
@@ -35,12 +35,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-hemp-400 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/">
           <Image
             src={logo}
             alt="Bhangro Logo"
             height={64}
-            className="h-16 w-auto object-contain rounded-md"
+            className="h-16 w-auto object-contain"
             priority
           />
         </Link>
