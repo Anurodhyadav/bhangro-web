@@ -405,7 +405,7 @@ export default function AdminPage() {
                     {products.map((prod) => {
                       const mainImage = prod.images?.[0] || null;
                       return (
-                        <tr key={prod.id} className="hover:bg-hemp-200/50 transition">
+                        <tr onClick={() => handleOpenEdit(prod)}  key={prod.id} className="hover:bg-hemp-200/50 cursor-pointer transition">
                           <td className="py-4 px-6">
                             <div className="flex items-center gap-4">
                               <div className="relative h-14 w-14 flex-shrink-0 rounded-xl bg-hemp-100/50 overflow-hidden border border-hemp-200">
@@ -451,7 +451,7 @@ export default function AdminPage() {
                               <Pencil size={14} /> Edit
                             </button>
                             <button
-                              onClick={() => handleDeleteProduct(prod)}
+                              onClick={(e) => { e.stopPropagation(); handleDeleteProduct(prod); }}
                               className="inline-flex cursor-pointer items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-100 text-red-700 hover:bg-red-600 hover:text-cream text-xs font-semibold transition"
                             >
                               <Trash2 size={14} /> Delete
