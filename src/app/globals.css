@@ -32,6 +32,15 @@ body {
   color: var(--color-charcoal);
 }
 
+/* Hide scrollbar utility for clean carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .illustration-wrap {
   animation: fadeIn 0.8s ease-out both;
 }
