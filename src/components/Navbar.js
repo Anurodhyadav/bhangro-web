@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ShoppingBag, User, LogOut, ShieldCheck, ChevronDown, Loader2 } from "lucide-react";
+import { Menu, X, ShoppingBag, LogOut, ShieldCheck, ChevronDown } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import logo from "@/assets/bhangro_transparent.svg";
@@ -18,7 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { cartCount } = useCart();
-  const { user, isAdmin, loading, loginWithGoogle, logout } = useAuth();
+  const { user, isAdmin, logout } = useAuth();
   const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -79,55 +79,47 @@ export default function Navbar() {
             )}
           </Link>
 
-          {/* Auth Section */}
-          {loading ? (
-            <div className="flex items-center justify-center w-9 h-9">
-              <Loader2 className="animate-spin text-hemp-800" size={18} />
-            </div>
-          ) : user ? (
+          {/* Admin-only auth section — invisible to regular shoppers */}
+          {isAdmin && user && (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center cursor-pointer gap-2 rounded-full border border-hemp-300 bg-hemp-200 px-3 py-1.5 text-sm font-medium text-hemp-900 hover:bg-hemp-200 transition"
+                className="flex items-center cursor-pointer gap-2 rounded-full border border-hemp-300 bg-hemp-200 px-3 py-1.5 text-sm font-medium text-hemp-900 hover:bg-hemp-100 transition"
               >
                 {user.photoURL ? (
                   <Image
                     src={user.photoURL}
-                    alt={user.displayName || "User"}
+                    alt={user.displayName || "Admin"}
                     width={26}
                     height={26}
                     className="rounded-full"
                   />
                 ) : (
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-hemp-800 text-xs text-cream">
-                    {(user.displayName || user.email || "U").charAt(0).toUpperCase()}
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-rust-600 text-xs text-cream font-bold">
+                    {(user.displayName || user.email || "A").charAt(0).toUpperCase()}
                   </div>
                 )}
-                <span className="max-w-[100px] truncate">{user.displayName || "Account"}</span>
+                <span className="max-w-[100px] truncate">{user.displayName || "Admin"}</span>
                 <ChevronDown size={14} className="text-hemp-700" />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-hemp-200 border border-hemp-200 shadow-xl py-2 z-50 text-sm">
-                  <div className="px-4 py-2 border-b border-hemp-200">
-                    <p className="font-bold text-hemp-900 truncate">{user.displayName || "User"}</p>
+                <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-hemp-200 border border-hemp-300 shadow-xl py-2 z-50 text-sm">
+                  <div className="px-4 py-2 border-b border-hemp-300">
+                    <p className="font-bold text-hemp-900 truncate">{user.displayName || "Admin"}</p>
                     <p className="text-xs text-hemp-700 truncate">{user.email}</p>
-                    {isAdmin && (
-                      <span className="inline-block mt-1 px-2 py-0.5 bg-rust-100 text-rust-700 text-[10px] font-bold rounded-md">
-                        Admin User
-                      </span>
-                    )}
+                    <span className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 bg-rust-600 text-cream text-[10px] font-bold rounded-md">
+                      <ShieldCheck size={10} /> Administrator
+                    </span>
                   </div>
 
-                  {isAdmin && (
-                    <Link
-                      href="/admin"
-                      onClick={() => setDropdownOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-hemp-900 hover:bg-hemp-100 font-medium transition"
-                    >
-                      <ShieldCheck size={16} className="text-rust-600" /> Admin Dashboard
-                    </Link>
-                  )}
+                  <Link
+                    href="/admin"
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 text-hemp-900 hover:bg-hemp-100 font-medium transition"
+                  >
+                    <ShieldCheck size={16} className="text-rust-600" /> Admin Dashboard
+                  </Link>
 
                   <button
                     onClick={() => {
@@ -141,14 +133,6 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-          ) : (
-            <button
-              onClick={loginWithGoogle}
-              className="flex items-center gap-2 rounded-full border border-hemp-800 px-4 py-2 text-sm font-medium text-hemp-900 hover:bg-hemp-800 hover:text-cream transition-colors"
-            >
-              <User size={18} />
-              <span>Login</span>
-            </button>
           )}
         </div>
 
@@ -196,11 +180,14 @@ export default function Navbar() {
               <span>Cart ({cartCount})</span>
             </Link>
 
-            {user ? (
+            {/* Admin-only sign out in mobile drawer */}
+            {isAdmin && user && (
               <div className="flex items-center justify-between pt-2">
                 <div className="flex items-center gap-2">
-                  <User size={18} className="text-hemp-800" />
-                  <span className="font-medium text-hemp-900 text-sm truncate max-w-[160px]">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-rust-600 text-cream text-xs font-bold rounded-md">
+                    <ShieldCheck size={12} /> Admin
+                  </span>
+                  <span className="font-medium text-hemp-900 text-sm truncate max-w-[130px]">
                     {user.displayName || user.email}
                   </span>
                 </div>
@@ -214,16 +201,6 @@ export default function Navbar() {
                   <LogOut size={16} /> Sign Out
                 </button>
               </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  loginWithGoogle();
-                }}
-                className="flex items-center gap-2 font-medium text-hemp-900 pt-1"
-              >
-                <User size={18} /> Sign In with Google
-              </button>
             )}
           </div>
         </div>
