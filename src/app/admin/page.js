@@ -509,7 +509,7 @@ export default function AdminPage() {
           <div className="relative w-full max-w-3xl rounded-3xl bg-hemp-200 border border-hemp-200 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto my-8">
             <button
               onClick={() => setIsFormOpen(false)}
-              className="absolute top-6 right-6 text-hemp-700 hover:text-hemp-900 p-1 rounded-full hover:bg-hemp-200"
+              className="absolute top-6 right-6 cursor-pointer text-hemp-700 hover:text-hemp-900 p-1 rounded-full hover:bg-hemp-200"
             >
               <X size={20} />
             </button>
@@ -682,7 +682,7 @@ export default function AdminPage() {
                         <button
                           type="button"
                           onClick={() => handleRemoveImage(idx)}
-                          className="absolute top-1 right-1 bg-red-600 text-cream p-1 rounded-full opacity-90 hover:opacity-100 shadow"
+                          className="absolute cursor-pointer top-1 right-1 bg-red-800 text-cream p-1 rounded-full opacity-90 hover:opacity-100 shadow"
                           title="Remove image"
                         >
                           <X size={12} />
@@ -719,7 +719,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-full bg-hemp-800 px-7 py-2.5 text-sm font-semibold text-cream hover:bg-rust-600 disabled:opacity-50 transition"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-hemp-800 px-7 py-2.5 text-sm font-semibold text-cream hover:bg-rust-600 disabled:opacity-50 transition"
                 >
                   {saving && <Loader2 className="animate-spin" size={16} />}
                   {saving ? "Saving Product..." : editingProduct ? "Update Product" : "Save Product"}
@@ -737,7 +737,7 @@ export default function AdminPage() {
 
 // ── Access Denied screen (non-admin Google account) ───────────────────────────
 function AccessDeniedScreen({ user, logout }) {
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(100);
 
   // Auto sign-out after countdown
   useEffect(() => {
@@ -760,36 +760,36 @@ function AccessDeniedScreen({ user, logout }) {
         {/* Heading */}
         <div className="space-y-1">
           <h1 className="font-serif text-2xl font-bold text-cream">Access Denied</h1>
-          <p className="text-hemp-400 text-sm">This account is not authorized</p>
+          <p className="text-cream text-sm">This account is not authorized</p>
         </div>
 
         {/* Account info */}
-        <div className="rounded-2xl bg-hemp-800 border border-hemp-700 px-5 py-4 text-sm text-left space-y-1">
-          <p className="text-hemp-500 text-xs uppercase tracking-wider font-semibold">Signed in as</p>
-          <p className="text-hemp-100 font-medium truncate">{user.displayName || "Unknown"}</p>
-          <p className="text-hemp-400 text-xs truncate">{user.email}</p>
-          <p className="text-red-400 text-xs mt-2 pt-2 border-t border-hemp-700">
-            This email does not have administrator privileges.
+        <div className="rounded-2xl bg-hemp-200 border border-hemp-700 px-5 py-4 text-sm text-left space-y-1">
+          <p className="text-hemp-900 text-xs uppercase tracking-wider font-semibold">Signed in as</p>
+          <p className="text-hemp-900 font-medium truncate">{user.displayName || "Unknown"}</p>
+          <p className="text-hemp-800 text-xs truncate">{user.email}</p>
+          <p className="text-red-800 text-xs mt-2 pt-2 border-t border-hemp-700">
+            *This email does not have administrator privileges.
           </p>
         </div>
 
         {/* Auto sign-out notice */}
-        <p className="text-hemp-500 text-xs">
+        <p className="text-cream text-xs">
           Signing out automatically in{" "}
-          <span className="text-red-400 font-bold">{countdown}s</span>…
+          <span className="text-red-600 font-bold">{countdown}s</span>…
         </p>
 
         {/* Actions */}
         <div className="flex flex-col gap-3">
           <button
             onClick={logout}
-            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-red-600 text-white px-5 py-3 text-sm font-semibold hover:bg-red-700 active:scale-95 transition-all"
+            className="w-full cursor-pointer flex items-center justify-center gap-2 rounded-2xl bg-red-800 text-cream px-5 py-3 text-sm font-semibold hover:bg-red-700 active:scale-95 transition-all"
           >
             <LogOut size={16} /> Sign Out Now
           </button>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-1.5 text-sm text-hemp-400 hover:text-hemp-200 transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 text-sm text-cream hover:text-hemp-200 transition-colors"
           >
             <ArrowLeft size={14} /> Back to Store
           </Link>

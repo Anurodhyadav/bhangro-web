@@ -95,7 +95,7 @@ export default function CartPage() {
                         <div className="flex items-center rounded-full border border-hemp-300 bg-hemp-100/50">
                           <button
                             onClick={() => updateQuantity(product.slug, quantity - 1)}
-                            className="p-2 text-hemp-800 hover:text-rust-600 transition"
+                            className="p-2 cursor-pointer text-hemp-800 hover:text-rust-600 transition"
                             aria-label="Decrease quantity"
                           >
                             <Minus size={14} />
@@ -105,7 +105,7 @@ export default function CartPage() {
                           </span>
                           <button
                             onClick={() => updateQuantity(product.slug, quantity + 1)}
-                            className="p-2 text-hemp-800 hover:text-rust-600 transition"
+                            className="p-2 cursor-pointer text-hemp-800 hover:text-rust-600 transition"
                             aria-label="Increase quantity"
                           >
                             <Plus size={14} />
@@ -115,7 +115,7 @@ export default function CartPage() {
                         {/* Remove Item Button */}
                         <button
                           onClick={() => removeFromCart(product.slug)}
-                          className="p-2 text-hemp-500 hover:text-rust-600 transition"
+                          className="p-2 cursor-pointer text-hemp-500 hover:text-rust-600 transition"
                           title="Remove item"
                         >
                           <Trash2 size={18} />
@@ -138,7 +138,7 @@ export default function CartPage() {
                 <div className="flex justify-between items-center pt-2">
                   <button
                     onClick={clearCart}
-                    className="text-xs font-medium text-hemp-600 hover:text-rust-600 underline"
+                    className="cursor-pointer text-xs font-medium text-hemp-600 hover:text-rust-600 underline"
                   >
                     Clear entire cart
                   </button>
